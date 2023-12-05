@@ -5,7 +5,7 @@ import cors from "cors";
 import helmet from "helmet";
 
 import { postRouter } from "./routes/post-routes.js";
-import { validarPost } from "./middlewares/validar-create-post.js"
+import { validarPost } from "./middlewares/validar-post.js"
 
 
 const app = express();
@@ -29,17 +29,6 @@ app.get('/', (req, res) => {
     res.sendFile('index.html')
 })
 
-app.patch('/', (req, res)=>{
-    res.send("Hello word from PATCH")
-})
-
-app.put('/', (req, res)=>{
-    res.send("Hello word from PUT")
-})
-
-app.delete('/', (req, res)=>{
-    res.send("Hello word from DELETE")
-})
 
 app.listen(3000)
 console.log("Server on port 3000")
