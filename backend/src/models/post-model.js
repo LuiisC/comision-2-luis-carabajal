@@ -1,4 +1,4 @@
-export const posts = [
+export let posts = [
     {
         title:"La creacion de un proyecto en React",
         desc: "Cree mi proyecto con ViteJS",
