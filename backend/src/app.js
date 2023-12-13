@@ -5,6 +5,10 @@ import helmet from "helmet";
 
 import { postRouter } from "./routes/post-routes.js";
 import { env } from "./settings/envs.js";
+import { authenticationMiddleware } from "./middlewares/authentication-middelware.js";
+import { authorizationMiddleware } from "./middlewares/authorization.middleware.js"
+import { userRouter } from "./routes/user-routes.js";
+import { startConnection } from "./settings/database.js"
 
 const app = express();
 //req tiene tod la informacion del cliente que hace la peticion
@@ -20,9 +24,11 @@ app.use(express.urlencoded({extended: false}))
 app.use(express.static("public"))
 
 //Validaciones personalizadas
-app.use("/posts", postRouter)
+app.use("/posts", authenticationMiddleware, authorizationMiddleware, postRouter)
+app.use("/users", userRouter)
 
 
-app.listen(env.PORT, ()=> {
+app.listen(env.PORT, async () => {
+    await startConnection();
     console.log(`Server on port ${env.PORT}`)
 })
