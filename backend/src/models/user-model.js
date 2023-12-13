@@ -1,5 +1,5 @@
 import bcrypt from "bcrypt";
-import { Schema, model } from "mongoose";
+import { Schema, model, Types } from "mongoose";
 
 
 const UserSchema = new Schema({
@@ -20,6 +20,12 @@ const UserSchema = new Schema({
         type: Boolean,
         default: false,
     },
+    tasks: [
+        {
+            type: Types.ObjectId,
+            ref: "Task",
+        }
+    ],
 });
 
 export const UserModel = model("User", UserSchema);

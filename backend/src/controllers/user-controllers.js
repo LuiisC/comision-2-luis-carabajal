@@ -50,7 +50,10 @@ export async function ctrlGetUserById(req, res) {
 
 export const ctrlListUsers = async (req, res) => {
     try {
-        const allUsers = await UserModel.find({},["-__v", "-_id"]);
+        const allUsers = await UserModel.find().populate("tasks", [
+            "text",
+            "done",
+          ]);
         return res.status(201).json(allUsers);
     } catch (error) {
         console.log(error);
