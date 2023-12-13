@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import { userModel } from "../models/user-model.js";
+import { UserModel } from "../models/user-model.js";
 
 export const authenticationMiddleware = (req, res, next) => {
     const { authorization } = req.headers;
@@ -10,7 +10,7 @@ export const authenticationMiddleware = (req, res, next) => {
 
     try {   
         const { id } = jwt.verify(token, "secret");
-        const user = userModel.findOne(id);
+        const user = UserModel.findOne(id);
         
         req.user = user;
         
