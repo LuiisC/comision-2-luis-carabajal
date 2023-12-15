@@ -1,10 +1,10 @@
-import { Test } from "../components/Test"
+import { Counter } from "../components/Counter"
 
 export const Home = () => {
   return (
-    <div>
+    <div className="dark-bg">
       <h1>Bienvenido a la página principal</h1>
-      <Test/>
+      <Counter/>
       </div>
   )
 }

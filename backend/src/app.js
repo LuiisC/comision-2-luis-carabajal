@@ -3,17 +3,18 @@ import morgan from "morgan";
 import cors from "cors";
 import helmet from "helmet";
 
-import { postRouter } from "./routes/post-routes.js";
 import { env } from "./settings/envs.js";
-import { authenticationMiddleware } from "./middlewares/authentication-middelware.js";
-import { authorizationMiddleware } from "./middlewares/authorization.middleware.js"
-import { userRouter } from "./routes/user-routes.js";
 import { startConnection } from "./settings/database.js"
 
+import { authRouter } from './routes/auth-routes.js';
+import { posteoRouter } from './routes/posteo-routes.js';
+import { validateToken } from './middlewares/validate-token.js';
+import { authHeader } from './models/validations/auth-validation.js';
+
+import { userRouter } from "./routes/user-routes.js";
+
 const app = express();
-//req tiene tod la informacion del cliente que hace la peticion
-//res metodo para responder al cliente
-//Middleware comunes
+
 app.use(morgan("dev"))
 app.use(cors())
 app.use(helmet())
@@ -23,9 +24,9 @@ app.use(express.json())
 app.use(express.urlencoded({extended: false}))
 app.use(express.static("public"))
 
-//Validaciones personalizadas
-app.use("/posts", authenticationMiddleware, authorizationMiddleware, postRouter)
-app.use("/users", userRouter)
+
+app.use('/api/auth', authRouter);
+app.use('/api/posteo', authHeader, validateToken, posteoRouter);
 
 
 app.listen(env.PORT, async () => {

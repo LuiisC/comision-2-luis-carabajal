@@ -1,15 +1,15 @@
 import { Router } from "express";
-import { ctrlLogin, ctrlCreateUser, ctrlListUsers, ctrlFindOneUser,ctrlDeleteUser, ctrlUpdateUser } from "../controllers/user-controllers.js"
+import { ctrlLoginUser, ctrlCreateUser } from "../controllers/user-controllers.js"
 
 const userRouter = Router();
 
-userRouter.get("/", ctrlListUsers);
+//userRouter.get("/", ctrlListUsers);
 
 userRouter.post("/register", ctrlCreateUser);
-userRouter.post("/login", ctrlLogin);
+userRouter.post("/login", ctrlLoginUser);
 
-userRouter.get("/:userId", ctrlFindOneUser);
-userRouter.patch("/:userId", ctrlUpdateUser);
-userRouter.delete("/:userId", ctrlDeleteUser);
+//userRouter.get("/:userId", ctrlFindOneUser);
+//userRouter.patch("/:userId", ctrlUpdateUser);
+//userRouter.delete("/:userId", ctrlDeleteUser);
 
 export {userRouter};

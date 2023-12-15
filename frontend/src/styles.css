@@ -1,35 +1,7 @@
-.btn {
-    border: none;
-    border-radius: 30px;
-    padding: 8px 12px;
-    font-size: 16px;
-    cursor: pointer;
-}
-.btn-blue {
-    background-color: blue;
-    color:white;
-}
-.btn-blue:hover {
-    background-color: darkblue;
-}
-
-.btn-red {
-    background-color: red;
-    color:white;
-}
-.btn-red:hover {
-    background-color: darkred;
-}
-
-.btn-green {
-    background-color: green;
-    color:white;
-}
-.btn-green:hover {
-    background-color: darkgreen;
-}
-
-.container {
-    background-color: gray;
-    padding: 2px 8px;
-}
+.dark-bg {
+    background-color: #222;
+    min-height: 100vh;
+    display: grid;
+    place-content: center;
+    color: #fff;
+  }

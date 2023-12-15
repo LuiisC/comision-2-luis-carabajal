@@ -1,7 +1,6 @@
 import bcrypt from "bcrypt";
 import { Schema, model, Types } from "mongoose";
 
-
 const UserSchema = new Schema({
     name: {
         type: String,
@@ -16,30 +15,25 @@ const UserSchema = new Schema({
         type: String,
         require: true,
     },
-    isAdmin: {
-        type: Boolean,
-        default: false,
-    },
-    tasks: [
+    posteo: [
         {
             type: Types.ObjectId,
-            ref: "Task",
+            ref: "Posteo",
         }
     ],
+},{
+    timestamps: true,
+    versionKey: false
 });
 
+UserSchema.pre('save', async function (next) {
+    if (!this.isModified('password')) return next();
+  
+    const hash = await bcrypt.hash(this.password, 10);
+  
+    this.password = hash;
+    next();
+  });
+  
+
 export const UserModel = model("User", UserSchema);
-
-
-export const LoginUser = async ({email, password}) => {
-    const user = await getUserByEmail({ email });
-
-    if (!user) return null;
-
-    const isMatch = await bcrypt.compare(password, user.password);
-
-    if (!isMatch) {
-        return null;
-    }
-    return user;
-}

@@ -1,13 +1,16 @@
-import { useState } from "react";
+import { useForm } from "../hooks/useForm";
 
-export const Form = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+export const Form2 = () => {
+  const { form, handleChange } = useForm({
+    email: "",
+    password: "",
+    username: "",
+  });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log({ email, password });
+    console.log(form);
   };
 
   return (
@@ -25,13 +28,12 @@ export const Form = () => {
           </label>
           <input
             type="email"
+            name="email"
             className="form-control"
             id="exampleFormControlInput1"
             placeholder="name@example.com"
-            value={email}
-            onChange={(e) => {
-              setEmail(e.target.value);
-            }}
+            value={form.email}
+            onChange={handleChange}
           />
         </div>
         <div className="mb-3">
@@ -40,14 +42,12 @@ export const Form = () => {
           </label>
           <input
             type="password"
+            name="password"
             className="form-control"
             id="exampleFormControlInput2"
             placeholder="***********"
-            value={password}
-            onChange={(e) => {
-              const valorDelInput = e.target.value;
-              setPassword(valorDelInput);
-            }}
+            value={form.password}
+            onChange={handleChange}
           />
         </div>
         <button className="btn btn-primary btn-sm" type="submit">
