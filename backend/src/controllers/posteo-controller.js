@@ -8,6 +8,8 @@ export const ctrlCreatePosteo = async (req, res) => {
 
     const posteo = new PosteoModel({
       title,
+      description,
+      url_img,
       author: userId,
     });
 
@@ -44,7 +46,7 @@ export const ctrlGetPosteo = async (req, res) => {
       .populate('author', ['name', 'email'])
 
     if (!posteo) {
-      return res.status(404).json({ error: 'Posteo not found' });
+      return res.status(404).json({ error: 'Post not found' });
     }
 
     return res.status(200).json(posteo);
@@ -88,7 +90,7 @@ export const ctrlDeletePosteo = async (req, res) => {
     });
 
     if (!posteo) {
-      return res.status(404).json({ error: 'Posteo not found' });
+      return res.status(404).json({ error: 'Post not found' });
     }
 
     await PosteoModel.findOneAndDelete({

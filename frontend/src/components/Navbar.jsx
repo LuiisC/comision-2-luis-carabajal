@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 
-export const Navbar = () => {
+const Navbar = () => {
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
       <div className="container-fluid">
@@ -28,3 +28,4 @@ export const Navbar = () => {
   </div>
 </nav>
 )}
+export default Navbar

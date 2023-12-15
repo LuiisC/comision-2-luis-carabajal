@@ -7,6 +7,10 @@ export const createPosteoValidations = [
     .notEmpty().withMessage('El campo { title } no debe estar vacio.')
     .isString().withMessage('El campo { title } debe ser un string.'),
   applyValidations,
+  body('description')
+    .notEmpty().withMessage('El campo { description } no debe estar vacio'),
+  body('url_img')
+    .isURL().withMessage('El campo { url_img } debe ser una URL válida'),
 ];
 
 export const listPosteoValidations = [
