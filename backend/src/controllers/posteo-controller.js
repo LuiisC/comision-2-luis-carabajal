@@ -1,10 +1,11 @@
 import { PosteoModel } from '../models/posteo-model.js';
+import { UserModel } from '../models/user-model.js'
 
 export const ctrlCreatePosteo = async (req, res) => {
   const userId = req.user._id;
 
   try {
-    const { title } = req.body;
+    const { title, description, url_img} = req.body;
 
     const posteo = new PosteoModel({
       title,
@@ -26,6 +27,17 @@ export const ctrlListPosteo = async (req, res) => {
 
   try {
     const posteos = await PosteoModel.find({ author: userId })
+      .populate('author', ['name', 'email'])
+
+    return res.status(200).json(posteos);
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+};
+
+export const ctrlListPosteosAll = async (req, res) => {
+  try {
+    const posteos = await PosteoModel.find()
       .populate('author', ['name', 'email'])
 
     return res.status(200).json(posteos);

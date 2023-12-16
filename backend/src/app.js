@@ -26,6 +26,7 @@ app.use(express.urlencoded({extended: false}))
 
 
 app.use('/api/auth', authRouter);
+app.use('/nologin/posteo', posteoRouter);
 app.use('/api/posteo', authHeader, validateToken, posteoRouter);
 
 

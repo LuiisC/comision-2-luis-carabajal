@@ -20,20 +20,20 @@ function LoginForm() {
 
     const formData = new FormData(e.target);
 
-    const name = formData.get("name");
+    const email = formData.get("email");
     const password = formData.get("password");
 
     const user = {
-      name,
+      email,
       password,
     };
 
-    const req = await fetch(`${API_URL}/auth/login`, {
+    const req = await fetch(`${API_URL}/api/auth/login`, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/json"
       },
-      body: JSON.stringify(user),
+        body: JSON.stringify(user),
     });
 
     if (req.status !== 200) {
@@ -46,8 +46,8 @@ function LoginForm() {
     login(res);
 
     ref.current.reset();
-
-    navigate("/");
+    
+    navigate("/posteos");
   };
 
   return (
@@ -56,22 +56,12 @@ function LoginForm() {
       <form onSubmit={handleSubmit} ref={ref} className={styles.form}>
         <div className={styles.inputGroup}>
           <label htmlFor={emailRef}>Email:</label>
-          <input
-            type="text"
-            placeholder="Juan Perez"
-            name="name"
-            id={emailRef}
-          />
+          <input type="email" placeholder="example@hotmail.com" name="email" id={emailRef}/>
         </div>
 
         <div className={styles.inputGroup}>
           <label htmlFor={passwordRef}>Password:</label>
-          <input
-            type="password"
-            placeholder="*******"
-            name="password"
-            id={passwordRef}
-          />
+          <input type="password" placeholder="*******" name="password" id={passwordRef}/>
         </div>
 
         <button>Login</button>

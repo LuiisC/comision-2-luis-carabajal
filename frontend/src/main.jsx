@@ -1,13 +1,18 @@
 import ReactDOM from "react-dom/client";
-import { App } from "./App"
-import "./styles.css"
-import {BrowserRouter} from "react-router-dom"
+import { BrowserRouter } from "react-router-dom";
 
-const element = document.getElementById("root");
-const root = ReactDOM.createRoot(element);
+import "./index.css"
+import Router from './Router'
 
-root.render(
-    <BrowserRouter>
-        <App/>
-    </BrowserRouter>
+import AuthProvider from "./providers/AuthProvider";
+import Navbar from "./components/Navbar";
+
+
+ReactDOM.createRoot(document.getElementById("root")).render(
+    <AuthProvider>
+        <BrowserRouter>
+        <Navbar/>
+        <Router />
+        </BrowserRouter>
+    </AuthProvider>
 )

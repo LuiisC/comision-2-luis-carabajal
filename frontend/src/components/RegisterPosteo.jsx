@@ -4,7 +4,7 @@ import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { API_URL } from "../utils/consts";
 
-function RegisterForm() {
+function RegisterPosteo() {
   const ref = useRef(null);
 
   const navigate = useNavigate();
@@ -16,25 +16,26 @@ function RegisterForm() {
 
     const formData = new FormData(e.target);
 
-    const name = formData.get("name");
-    const email = formData.get("email");
-    const password = formData.get("password");
+    const title = formData.get("title");
+    const description = formData.get("description");
+    const url_img = formData.get("url_img");
+    //const author = formData.get("author");
 
-    const user = {
-      name,
-      email,
-      password,
+    const posteo = {
+      title,
+      description,
+      url_img,
     };
 
-    const req = await fetch(`${API_URL}/api/auth/register`, {
+    const req = await fetch(`${API_URL}/api/posteo`, {
       method: "POST",
-      body: JSON.stringify(user),
+      body: JSON.stringify(posteo),
       headers: {
         "Content-Type": "application/json",
       },
     });
 
-    if (req.status !== 201) return alert("Error al registrar usuario");
+    if (req.status !== 201) return alert("Error al registrar posteo");
     ref.current.reset();
 
     navigate("/");
@@ -42,23 +43,23 @@ function RegisterForm() {
 
   return (
     <div>
-      <h2>Register</h2>
+      <h2>Crear Post</h2>
       <form onSubmit={handleSubmit} ref={ref} className={styles.form}>
          <div className={styles.inputGroup}>
-          <label>Username: </label>
-          <input type="text" placeholder="Juan Perez" name="name" />
+          <label htmlFor="">Titulo: </label>
+          <input type="text" placeholder="Titulo del post" name="title" />
         </div>
         <div className={styles.inputGroup}>
-        <label>Email: </label>
-          <input type="email" placeholder="my-email@email.com" name="email" />
+        <label htmlFor="">Descripción: </label>
+          <input type="email" placeholder="Una descripcion del post" name="description" />
         </div>
         <div className={styles.inputGroup}>
-        <label >Password: </label>
-          <input type="password" placeholder="*******" name="password" />
+        <label htmlFor="">Link a la imagen: </label>
+          <input type="text" placeholder="http://www.example-image.com/" name="url_img" />
         </div>
         <button>Register</button>
       </form>
     </div>
   );
 }
-export default RegisterForm;
+export default RegisterPosteo;

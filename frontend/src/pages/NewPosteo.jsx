@@ -18,7 +18,7 @@ const NewPosteo = () => {
 
     if (!title.trim()) return;
 
-    fetch(`${API_URL}/posteo`, {
+    fetch(`${API_URL}/posteo/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -28,13 +28,12 @@ const NewPosteo = () => {
     }).then((res) => {
       if (res.status !== 201) return alert("Error creating post");
 
-      navigate("/posteo");
+      navigate("/");
     });
   };
 
   return (
     <div>
-      <Navbar />
       <h2>Create a new Post</h2>
       <form onSubmit={handleSubmit} className={styles.form}>
         <div className={styles.inputGroup}>

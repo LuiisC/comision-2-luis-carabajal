@@ -1,38 +1,36 @@
 import styles from "../styles/Posteo.module.css";
 
-import { useCallback, useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { API_URL } from "../utils/consts";
-import { AuthContext } from "../providers/AuthProvider";
-import Posteo from "../components/Posteo";
-import Navbar from "../components/Navbar";
+import { PosteoItem } from "../components/PosteoItem";
+import { Link } from "react-router-dom";
 
 function PosteosPage() {
-  const [posteos, setPosteos] = useState([]);
-
-  const { auth } = useContext(AuthContext);
-
-  const getPosteo = useCallback(() => {
-    fetch(`${API_URL}/posteo`, {
-      headers: {
-        Authorization: auth.token,
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => setPosteos(data))
-      .catch((err) => console.log(err));
-  }, [auth.token]);
-
+  const [posts, setPosts] = useState([]);
+  
   useEffect(() => {
-    getPosteo();
-  }, [auth, getPosteo]);
+    fetch(`${API_URL}/nologin/posteo/all`, {
+      method: "GET",
+    })
+      .then((response) => response.json())
+      .then((data) => {setPosts(data);});
+  }, []);
 
   return (
     <div className={styles.container}>
-      <Navbar />
-      <h1>My posts</h1>
-      <main className={styles.section}>
-        <Posteo getPosteo={getPosteo} posteos={posteos} />
-      </main>
+      <h2>Página de Posteos de Usuarios: </h2><br/>
+      <button>Crear Post</button>
+      <Link to="/posteos/new"/>
+      <div className={styles.postItem}>{posts.map((elem) => { 
+        return ( 
+        <PosteoItem 
+          key={elem._id}
+          title={elem.title}
+          description={elem.description}
+          url_img={elem.url_img}
+          author={elem.author.name}
+        />)})}
+      </div>
     </div>
   );
 }

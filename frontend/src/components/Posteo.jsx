@@ -19,18 +19,10 @@ const Posteo = ({ posteos, getPosteo }) => {
 
   return (
     <div style={{ minWidth: "420px" }}>
-      <Link to="/posteo/new" className="btn btn-success">
-        Create
-      </Link>
-      <input
-        type="search"
-        className="form-control"
-        placeholder="Search"
-        value={search}
-        onChange={(e) => {
-          setSearch(e.target.value);
-        }}
-      />
+      <Link to="/posteo/new" className="btn btn-success">Crear</Link>
+      <Link to="/posteo/delete" className="btn btn-success">Borrar</Link>
+      <b/>
+      <input type="search" className="form-control" placeholder="Search" value={search} onChange={(e) => { setSearch(e.target.value);}}/>
       <>
         {filterPosteos.map((posteo) => {
           return (

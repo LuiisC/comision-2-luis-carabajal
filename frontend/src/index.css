@@ -1,0 +1,13 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  .delete-button {
+    background-color: #0000;
+    border: none;
+    outline: none;
+    font-size: 30px;
+    color: red;
+  }
